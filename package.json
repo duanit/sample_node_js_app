@@ -1,0 +1,17 @@
+{
+  "name": "cron",
+  "version": "1.0.0",
+  "description": "cronJob",
+  "main": "index.js",
+  "scripts": {
+ 
+    "start":"node server.js",
+    "test": "ng serve"
+  },
+  "author": "Duanit3",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "node-cron": "^3.0.0"
+  }
+}
