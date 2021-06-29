@@ -49,7 +49,7 @@ fs.writeFile('./test/test.txt', content, err => {
   console.log("file written successfully");
 });
 
-fs.readFile('test.txt', 'utf8' , (err, data) => {
+fs.readFile('./test/test.txt', 'utf8' , (err, data) => {
     if (err) {
       console.error(err)
       return
