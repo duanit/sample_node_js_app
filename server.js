@@ -27,6 +27,37 @@ const PORT = process.env.PORT || 8080
 // app.get('/', (req, res) => res.send(
 //     'Hello World1'
 //     ))
+const fs = require('fs')
+const folderName = './test'
+
+try {
+  if (!fs.existsSync(folderName)) {
+    fs.mkdirSync(folderName)
+  }
+} catch (err) {
+  console.error(err)
+}
+
+const content = 'Some content!'
+
+fs.writeFile('./test/test.txt', content, err => {
+  if (err) {
+    console.error(err)
+    return
+  }
+  //file written successfully
+  console.log("file written successfully");
+});
+
+fs.readFile('test.txt', 'utf8' , (err, data) => {
+    if (err) {
+      console.error(err)
+      return
+    }
+    console.log(data)
+  });
+
+
 router.get('/',function(req,res){
     res.sendFile(path.join(__dirname+'/index.html'));
     //__dirname : It will resolve to your project folder.
