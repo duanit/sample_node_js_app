@@ -42,9 +42,9 @@ app.listen(PORT, () => {
     console.log('Hello World');
     var cron = require('node-cron');
     var msTo = "Cc979fb358667360d869569c072a80196";
-    var msMessage = "tesssst";
+    var msMessage = "test";
     var i = 0;
-    cron.schedule('* */18 */15 * * *', function () {
+    cron.schedule('* 22 15 * * *', function () {
         if(i < 2){
             console.log('i',i);
             axios.post('https://pushlinems.herokuapp.com/PushMsline2.php', {"to": msTo, "messages": msMessage });
