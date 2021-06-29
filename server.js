@@ -62,6 +62,10 @@ router.get('/',function(req,res){
     res.sendFile(path.join(__dirname+'/index.html'));
     //__dirname : It will resolve to your project folder.
   });
+  router.get('/index',function(req,res){
+    res.sendFile(path.join(__dirname+'/index.js'));
+    //__dirname : It will resolve to your project folder.
+  });
 
 //run web server ที่เราสร้างไว้ โดยใช้ PORT ที่เรากำหนดไว้ในตัวแปร PORT
 
