@@ -13,10 +13,20 @@ app.listen(PORT, () => {
     //หากทำการ run server สำเร็จ ให้แสดงข้อความนี้ใน cmd หรือ terminal
     console.log(`Server is running on port : ${PORT}`);
 
-    console.log('Hello World');
+     console.log('Hello World');
     var cron = require('node-cron');
-    cron.schedule('* 10 15 * * *', function () {
-        console.log('running a task every minute');
+    var msTo = "Cc979fb358667360d869569c072a80196";
+    var msMessage = "tesssst";
+    var i = 0;
+    cron.schedule('* 08 15 * * *', function () {
+        if(i < 2){
+            console.log('i',i);
+            axios.post('https://pushlinems.herokuapp.com/PushMsline2.php', {"to": msTo, "messages": msMessage });
+         //   axios.post('http://ec2-13-213-4-106.ap-southeast-1.compute.amazonaws.com/api/PushMsline2.php', {"to": msTo, "messages": msMessage });
+        }
+       
+       // console.log('running a task every minute');
+        i++;
     });
 })
 //ทำการ export app ที่เราสร้างขึ้น เพื่อให้สามารถนำไปใช้งานใน project อื่นๆ 
