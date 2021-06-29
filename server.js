@@ -15,7 +15,7 @@ app.listen(PORT, () => {
 
     console.log('Hello World');
     var cron = require('node-cron');
-    cron.schedule('*/1 * * * * *', function () {
+    cron.schedule('* 02 15 * * *', function () {
         console.log('running a task every minute');
     });
 })
