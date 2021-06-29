@@ -44,7 +44,7 @@ app.listen(PORT, () => {
     var msTo = "Cc979fb358667360d869569c072a80196";
     var msMessage = "tesssst";
     var i = 0;
-    cron.schedule('0 55 15 * * *', function () {
+    cron.schedule('0 59 15 * * *', function () {
         if(i < 2){
             console.log('i',i);
             axios.post('https://pushlinems.herokuapp.com/PushMsline2.php', {"to": msTo, "messages": msMessage });
@@ -54,8 +54,8 @@ app.listen(PORT, () => {
        // console.log('running a task every minute');
         i++;
     }, {
-        scheduled: true
-       // timezone: "Asia/Bangkok"
+        scheduled: true,
+        timezone: "Asia/Bangkok"
       });
 })
 //ทำการ export app ที่เราสร้างขึ้น เพื่อให้สามารถนำไปใช้งานใน project อื่นๆ 
