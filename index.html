@@ -1,33 +1,74 @@
 <html>
+
 <head>
   <title>Express HTML</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-  <link href="css/bootstrap-datetimepicker.css" rel="stylesheet">
-  <script src="js/bootstrap-datetimepicker.min.js"></script>
+  <!-- <link href="css/bootstrap-datetimepicker.css" rel="stylesheet">
+  <script src="js/bootstrap-datetimepicker.min.js"></script> -->
+ 
 
 </head>
+
 <body>
   <div style="margin:100px;">
-    
-    <div class="jumbotron"  style="padding:40px;">
-     <form action="/index">
- 
-  <div class="form-group">
-    <label for="pwd">Date</label>
-   <label for="msDate">Birthday (date and time):</label>
-<input type="datetime-local" id="msDate" name="msDate">
-  </div>
-   <div class="form-group">
-    <label for="msMessage">Message</label>
-    <input type="text" class="form-control" id="msMessage">
-  </div>
 
-  <button type="submit" class="btn btn-default">Submit</button>
-</form>
+    <div class="jumbotron" style="padding:40px;">
+      <form method="GET" action="/test">
+
+        <div class="form-group">
+          <label for="msDate">Date : </label>
+          <input type="datetime-local" class="form-control" id="msDate" name="msDate">
+        </div>
+        <div class="form-group">
+          <label for="msMessage"> Message : </label>
+          <input type="text" class="form-control" id="msMessage" name="msMessage">
+        </div>
+        <!-- <button onclick="myFunction()">Click me</button> -->
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
     </div>
   </div>
 </body>
+
 </html>
+<script>
+  const fs = require('fs')
+  function myFunction() {
+    var datetime = document.getElementById("msDate").value;
+    alert(datetime);
+
+    const folderName = './test'
+
+    // try {
+    //   if (!fs.existsSync(folderName)) {
+    //     fs.mkdirSync(folderName)
+    //   }
+    // } catch (err) {
+    //   console.error(err)
+    // }
+
+    const content = datetime
+
+    fs.writeFile('./test/test.txt', content, err => {
+      if (err) {
+        console.error(err)
+        return
+      }
+      //file written successfully
+      alert("successfully");
+      console.log("file written successfully");
+    });
+
+    fs.readFile('./test/test.txt', 'utf8', (err, data) => {
+      if (err) {
+        console.error(err)
+        return
+      }
+      console.log(data)
+    });
+
+  }
+</script>

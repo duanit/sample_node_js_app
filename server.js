@@ -7,6 +7,13 @@ var moment = require('moment'); // require
 const app = express();
 const path = require('path');
 const router = express.Router();
+
+
+
+
+var bodyParser = require('body-parser')
+
+app.use(bodyParser.json());
 //สร้างตัวแปร PORT ขึ้นมารับค่า port ในกรณีที่เราได้กำหนดไว้ใน environment ของเครื่อง
 //แต่ถ้าไม่ได้กำหนดไว้ เราจะใช้ค่า 8080 แทน
 const PORT = process.env.PORT || 8080
@@ -67,7 +74,17 @@ try {
 //     res.sendFile(path.join(__dirname+'/index.js'));
 //     //__dirname : It will resolve to your project folder.
 //   });
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname+'/index.html'));
+  });
+  
+//   app.get("/ssd", (req, res) => {
+//     res.send("Thank you for subscribing");
+  
+//     console.log(req.query);
+    
+//   });
+app.get('/ss', (req, res) => {
     // HTML Form
     //     res.send(`<form action="/test" method="GET">
     //     <label>Username</label><br>
@@ -84,8 +101,10 @@ app.get('/', (req, res) => {
           <label for="msMessage"> Message : </label>
           <input type="text" class="form-control" id="msMessage" name="msMessage">
         </div><input type="submit"></form>`);
-});
 
+        
+
+});
 app.get('/test', (req, res) => {
 
     var _msDate = moment(req.query.msDate).format('YYYYMMDDHHmm');
@@ -93,16 +112,24 @@ app.get('/test', (req, res) => {
     //Displaying the GET data in console
     console.log(req.query);
     res.send('Check the console');
+  
     fs.writeFile('./test/' + _msDate + '.txt', req.query.msMessage, err => {
         if (err) {
             console.error(err)
             return
+        } else {
+
+            //file written successfully
+            console.log("file written successfully");
+            
         }
-        //file written successfully
-        console.log("file written successfully");
+
+
     });
 
+
 });
+
 //run web server ที่เราสร้างไว้ โดยใช้ PORT ที่เรากำหนดไว้ในตัวแปร PORT
 
 app.use('/', router);
@@ -123,14 +150,14 @@ app.listen(PORT, () => {
             if (err) {
                 //console.error(err)
                 return
-            }else{
+            } else {
                 fs.readFile('./test/' + _Datenow + '.txt', 'utf8', (err, data) => {
                     if (err) {
                         //console.error(err)
                         return
                     } else {
-                        axios.post('http://ec2-13-213-4-106.ap-southeast-1.compute.amazonaws.com/api/PushMsline2.php', { "to": msTo, "messages": data+'_'+moment().format('YYYYMMDDHHmmss') });
-                        console.log(data+'_'+moment().format('YYYYMMDDHHmmss'));
+                        axios.post('http://ec2-13-213-4-106.ap-southeast-1.compute.amazonaws.com/api/PushMsline2.php', { "to": msTo, "messages": data + '_' + moment().format('YYYYMMDDHHmmss') });
+                        console.log(data + '_' + moment().format('YYYYMMDDHHmmss'));
                         const path = './test/' + _Datenow + '.txt';
                         try {
                             fs.unlinkSync(path)
@@ -139,10 +166,10 @@ app.listen(PORT, () => {
                             console.error(err)
                         }
                     }
-    
+
                 });
             }
-           
+
         })
 
         if (i < 2) {
