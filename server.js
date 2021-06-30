@@ -39,9 +39,9 @@ const fs = require('fs')
 const folderName = path.join(__dirname+'/test')
 
 try {
-   // if (!fs.existsSync(folderName)) {
+    if (!fs.existsSync(folderName)) {
         fs.mkdirSync(folderName)
-    //}
+    }
     console.log("folder written successfully" +path.join(__dirname));
 } catch (err) {
     console.error(err)
@@ -114,7 +114,7 @@ app.get('/test', (req, res) => {
     console.log(req.query);
     res.send('Check the console');
   
-    fs.writeFile('./test/' + _msDate + '.txt', req.query.msMessage, err => {
+    fs.writeFile(folderName+'/' + _msDate + '.txt', req.query.msMessage, err => {
         if (err) {
             console.error(err)
             return
@@ -147,19 +147,19 @@ app.listen(PORT, () => {
     cron.schedule('*/1 * * * *', function () {
         var _Datenow = moment().format('YYYYMMDDHHmm');
         var _Datenowss = moment().format('YYYYMMDDHHmmss');
-        fs.stat('./test/' + _Datenow + '.txt', (err, stats) => {
+        fs.stat(folderName+'/' + _Datenow + '.txt', (err, stats) => {
             if (err) {
                 console.error(err)
                 return
             } else {
-                fs.readFile('./test/' + _Datenow + '.txt', 'utf8', (err, data) => {
+                fs.readFile(folderName+'/' + _Datenow + '.txt', 'utf8', (err, data) => {
                     if (err) {
                         //console.error(err)
                         return
                     } else {
                         axios.post('http://ec2-13-213-4-106.ap-southeast-1.compute.amazonaws.com/api/PushMsline2.php', { "to": msTo, "messages": data + '_' + moment().format('YYYYMMDDHHmmss') });
                         console.log(data + '_' + moment().format('YYYYMMDDHHmmss'));
-                        const path = './test/' + _Datenow + '.txt';
+                        const path = folderName+'/' + _Datenow + '.txt';
                         try {
                             fs.unlinkSync(path)
                             //file removed
