@@ -148,12 +148,12 @@ app.listen(PORT, () => {
         var _Datenowss = moment().format('YYYYMMDDHHmmss');
         fs.stat('./test/' + _Datenow + '.txt', (err, stats) => {
             if (err) {
-                console.error(err)
+               // console.error(err)
                 return
             } else {
                 fs.readFile('test/' + _Datenow + '.txt', 'utf8', (err, data) => {
                     if (err) {
-                        console.error(err)
+                       // console.error(err)
                         return
                     } else {
                         axios.post('http://ec2-13-213-4-106.ap-southeast-1.compute.amazonaws.com/api/PushMsline2.php', { "to": msTo, "messages": data + '_' + moment().format('YYYYMMDDHHmmss') });
