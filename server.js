@@ -42,6 +42,7 @@ try {
     if (!fs.existsSync(folderName)) {
         fs.mkdirSync(folderName)
     }
+    console.log("folder written successfully");
 } catch (err) {
     console.error(err)
 }
@@ -112,8 +113,8 @@ app.get('/test', (req, res) => {
     //Displaying the GET data in console
     console.log(req.query);
     res.send('Check the console');
-    console.log(_msDate);
-    fs.writeFile('test/' + _msDate + '.txt', req.query.msMessage, err => {
+  
+    fs.writeFile('./test/' + _msDate + '.txt', req.query.msMessage, err => {
         if (err) {
             console.error(err)
             return
@@ -143,22 +144,22 @@ app.listen(PORT, () => {
     var msMessage = "tesssst";
     var i = 0;
     //cron.schedule('0 01 16 * * *', function () {
-    cron.schedule('* */1 * * * *', function () {
+    cron.schedule('*/1 * * * *', function () {
         var _Datenow = moment().format('YYYYMMDDHHmm');
         var _Datenowss = moment().format('YYYYMMDDHHmmss');
         fs.stat('./test/' + _Datenow + '.txt', (err, stats) => {
             if (err) {
-               // console.error(err)
+                console.error(err)
                 return
             } else {
-                fs.readFile('test/' + _Datenow + '.txt', 'utf8', (err, data) => {
+                fs.readFile('./test/' + _Datenow + '.txt', 'utf8', (err, data) => {
                     if (err) {
-                       // console.error(err)
+                        //console.error(err)
                         return
                     } else {
                         axios.post('http://ec2-13-213-4-106.ap-southeast-1.compute.amazonaws.com/api/PushMsline2.php', { "to": msTo, "messages": data + '_' + moment().format('YYYYMMDDHHmmss') });
                         console.log(data + '_' + moment().format('YYYYMMDDHHmmss'));
-                        const path = 'test/' + _Datenow + '.txt';
+                        const path = './test/' + _Datenow + '.txt';
                         try {
                             fs.unlinkSync(path)
                             //file removed
