@@ -36,7 +36,7 @@ const PORT = process.env.PORT || 8080
 //     'Hello World1'
 //     ))
 const fs = require('fs')
-const folderName = './test'
+const folderName = path.join(__dirname+'/test')
 
 try {
     if (!fs.existsSync(folderName)) {
