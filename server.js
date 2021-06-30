@@ -41,7 +41,12 @@ const folderName = path.join(__dirname+'/test1')
 try {
     if (!fs.existsSync(folderName)) {
        // fs.mkdirSync(folderName)
-        fs.mkdir(path.join(__dirname, 'test1'));
+       fs.mkdir(path.join(__dirname, 'test1'), (err) => {
+        if (err) {
+            return console.error(err);
+        }
+        console.log('Directory created successfully!');
+    });
     }
     console.log("folder written successfully" +folderName);
 } catch (err) {
