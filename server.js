@@ -39,9 +39,9 @@ const fs = require('fs')
 const folderName = path.join(__dirname+'/test')
 
 try {
-    if (!fs.existsSync(folderName)) {
+   // if (!fs.existsSync(folderName)) {
         fs.mkdirSync(folderName)
-    }
+    //}
     console.log("folder written successfully" +path.join(__dirname));
 } catch (err) {
     console.error(err)
