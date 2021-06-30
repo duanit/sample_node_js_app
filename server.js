@@ -42,7 +42,7 @@ try {
     if (!fs.existsSync(folderName)) {
         fs.mkdirSync(folderName)
     }
-    console.log("folder written successfully" +__dirname);
+    console.log("folder written successfully" +path.join(__dirname));
 } catch (err) {
     console.error(err)
 }
