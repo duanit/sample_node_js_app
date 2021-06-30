@@ -36,8 +36,8 @@ const PORT = process.env.PORT || 8080
 //     'Hello World1'
 //     ))
 const fs = require('fs')
-const folderName = path.join(__dirname+'/test')
-
+//const folderName = path.join(__dirname+'/test')
+const folderName = '../../var/test'
 try {
     if (!fs.existsSync(folderName)) {
         fs.mkdirSync(folderName)
