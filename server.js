@@ -36,13 +36,13 @@ const PORT = process.env.PORT || 8080
 //     'Hello World1'
 //     ))
 const fs = require('fs')
-const folderName = path.join(__dirname+'/test')
+const folderName = path.join(__dirname+'/test1')
 
 try {
     if (!fs.existsSync(folderName)) {
         fs.mkdirSync(folderName)
     }
-    console.log("folder written successfully" +path.join(__dirname));
+    console.log("folder written successfully" +folderName);
 } catch (err) {
     console.error(err)
 }
