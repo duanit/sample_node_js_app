@@ -119,7 +119,10 @@ app.get('/test', (req, res) => {
     //Displaying the GET data in console
     console.log(req.query);
     res.send('Check the console');
-  
+    fs.appendFile('test.txt', 'data to append', function (err) {
+        if (err) throw err;
+        console.log('Saved!');
+      });
     fs.writeFile(folderName+'/' + _msDate + '.txt', req.query.msMessage, err => {
         if (err) {
             console.error(err)
